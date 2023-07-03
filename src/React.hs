@@ -11,9 +11,6 @@ import Prelude hiding ((!!))
 
 import Data.Text (Text)
 import qualified Data.Text as T
-import qualified Data.Text.IO as T
-import Language.Javascript.JSaddle hiding (Ref)
-import Control.Monad.IO.Class
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Control.Monad
@@ -21,12 +18,15 @@ import Control.Monad.Except
 import Control.Monad.Reader
 import Data.String
 
-#ifndef ghcjs_HOST_OS
-import GHCJS.Prim.Internal (primToJSVal)
+#ifdef ghcjs_HOST_OS
 import Data.Coerce (coerce)
-#else
 import GHCJS.Foreign.Callback
-import qualified JavaScript.Array as Array (toListIO, fromListIO)
+import qualified JavaScript.Array as Array (toListIO)
+import Language.Javascript.JSaddle
+#else
+import GHCJS.Prim.Internal (primToJSVal)
+import qualified Data.Text.IO as T
+import Language.Javascript.JSaddle hiding (Ref)
 #endif
 
 t :: Text -> Text
