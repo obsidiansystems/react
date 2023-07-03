@@ -1,0 +1,63 @@
+cabal-version:      3.0
+name:               react
+version:            0.1.0.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Obsidian Systems LLC
+maintainer:         maintainer@obsidian.systems
+category:           Web
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+library
+  import:           warnings
+  exposed-modules:
+    React
+
+  build-depends:    base
+                  , jsaddle
+                  , jsaddle-dom
+                  , ghcjs-dom
+                  , text
+                  , containers
+                  , mtl
+                  , deepseq
+                  , aeson
+                  , scientific
+                  , bytestring
+                  , stm
+                  , ref-tf
+                  , transformers
+                  , unliftio-core
+                  , exceptions
+                  , async
+                  , primitive
+                  , lens
+                  , ghc-prim
+                  , http-types
+                  , entropy
+                  , base64-bytestring
+                  , witherable
+                  , foreign-store
+                  , dependent-sum
+                  , reflection
+  hs-source-dirs:
+    src
+
+  if impl(ghcjs)
+    build-depends: ghcjs-base == 0.2.*
+                  , ghcjs-prim
+                  -- This is to allow the hashable patches to work
+                  -- the hashable should to be pinned in reflex-platform
+                  , hashable == 1.3.5.0
+  else
+    build-depends: websockets
+                  , wai
+                  , wai-websockets
+                  , warp
+                  , jsaddle-warp
+
+  default-language: Haskell2010
