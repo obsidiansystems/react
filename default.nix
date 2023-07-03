@@ -1,7 +1,7 @@
 {
   reflex-platform ? import ./dep/reflex-platform { system = builtins.currentSystem; }
 }: (reflex-platform.project ({ pkgs, thunkSource, ... }: {
-  name = "reflex-react";
+  name = "react";
   src = ./.;
   ghcjs-compiler-nix-name = "ghcjs8107JSString"; #TODO: This must be default
   compiler-nix-name = "ghc8107Splices"; #TODO: This must be default
