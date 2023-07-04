@@ -31,16 +31,6 @@ newtype Hook a = Hook { unHook :: ReaderT React JSM a }
 #endif
            )
 
-newtype Render a = Render { unRender :: ReaderT React JSM a }
-  deriving ( Functor
-           , Applicative
-           , Monad
-           , MonadJSM
-#ifndef ghcjs_HOST_OS
-           , MonadIO
-#endif
-           )
-
 newtype Element = Element { unElement :: ReaderT React JSM JSVal }
 
 instance IsString Element where
