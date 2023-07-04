@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 module React.Types where
 
@@ -21,10 +22,24 @@ instance MakeObject (Component props refVal) where
   makeObject = makeObject . functionObject' . unComponent
 
 newtype Hook a = Hook { unHook :: ReaderT React JSM a }
-  deriving (Functor, Applicative, Monad, MonadIO, MonadJSM)
+  deriving ( Functor
+           , Applicative
+           , Monad
+           , MonadJSM
+#ifndef ghcjs_HOST_OS
+           , MonadIO
+#endif
+           )
 
 newtype Render a = Render { unRender :: ReaderT React JSM a }
-  deriving (Functor, Applicative, Monad, MonadIO, MonadJSM)
+  deriving ( Functor
+           , Applicative
+           , Monad
+           , MonadJSM
+#ifndef ghcjs_HOST_OS
+           , MonadIO
+#endif
+           )
 
 newtype Element = Element { unElement :: ReaderT React JSM JSVal }
 
