@@ -5,7 +5,6 @@ import Prelude hiding ((!!))
 import Control.Monad
 import Control.Monad.Except
 import Control.Monad.Reader
-import Data.Text (Text)
 import Language.Javascript.JSaddle hiding (Ref)
 
 import React.JSaddle
@@ -14,6 +13,7 @@ import React.Types
 
 --TODO: Input can be an initializer function rather than value
 --TODO: `set` can take `a -> a` instead of `a`
+--TODO: I bet React always returns the same function object for the setter; if we re-wrap the function using `useCallback` each time, we are probably hurting performance by making it be a new object each time and forcing rerendering of children
 useState :: (ToJSVal a, FromJSVal a) => a -> Hook (a, a -> JSM ())
 useState initialValue = Hook $ do
   react <- ask
