@@ -44,3 +44,8 @@ library
     build-depends: jsaddle-warp
 
   default-language: Haskell2010
+  default-extensions:
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    LambdaCase
+    OverloadedStrings

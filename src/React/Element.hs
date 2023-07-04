@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module React.Element where
 
 import Control.Monad.Except
