@@ -8,7 +8,10 @@ import React.JSaddle
 import React.Types
 
 --TODO: The Hook section shouldn't have any control flow to it; probably it also shouldn't depend on props except in specific ways
-component :: FromJSVal props => (props -> Hook Element) -> ReaderT React JSM (Component props ())
+component
+  :: FromJSVal props
+  => (props -> Hook Element)
+  -> ReaderT React JSM (Component props ())
 component hook = do
   react <- ask
   f <- lift $ function' $ \_ _ args -> flip runReaderT react $ do
